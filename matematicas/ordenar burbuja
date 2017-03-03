@@ -1,0 +1,127 @@
+var divisor =  [-64, -104, 8, 128, 126, 40, 84, 8, -44, -52, -310, -86, -177, 265, 233]
+
+var lit = [["y"], [], ["y"], ["y"], ["y"], ["y"], ["y"], ["y"], ["y"], ["y"], ["y"], ["y"], ["y"], ["y"], ["y"]]
+ 
+var expo = [[4], [], [5], [1], [11], [14], [12], [13], [6], [2], [7], [10], [8], [9], [3]]
+//var divisor =  [32, -32, 144, 288, -144, 32, -32, 144, 288, -144, 32, -32, 144, 288, -144];
+// var lit = [["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"], ["b", "e"]];
+ //var expo = [[12, 14], [13, 15], [6, 16], [10, 14], [14, 10], [9, 7], [10, 8], [3, 9], [7, 7], [11, 3], [17, 13], [18, 14], [11, 15], [15, 13], [19, 9]];
+
+ var letra = 'y';
+var pos1, pos2, posm, aux;
+
+for(var i = 0; i < divisor.length; i++ ){
+
+    for(var j = i+1; j < divisor.length; j++){
+             
+            pos1 = lit[i].indexOf(letra);
+            pos2 = lit[j].indexOf(letra);
+            
+         if(pos1 != -1){
+              
+             if(pos2 != -1){
+
+                  if(expo[i][pos1] < expo[j][pos2]){
+                      aux = divisor[i];
+                      divisor[i] = divisor[j];
+                      divisor[j] = aux;
+
+                      aux = expo[i];
+                      expo[i] = expo[j];
+                      expo[j] = aux;
+
+                      aux = lit[i];
+                      lit[i] = lit[j];
+                      lit[j] = aux;
+                   }
+              }
+              
+         }
+         else{
+           //console.log(lit[i]);
+           divisor.push(divisor[i]);
+           lit.push(lit[i]);
+           expo.push(expo[i]);
+           
+           divisor.splice(i,1);
+           lit.splice(i,1);
+           expo.splice(i,1);
+           
+         }
+            
+    }
+ 
+}
+      
+console.log(divisor);
+console.log(lit);
+console.log(expo);
+
+///////////////////////////////////////////////////////divide monomios
+
+var num1 = 10;
+var num2 = 1;
+var lit1 = ['c', 'd'];
+var expo1 = [5,   4];
+
+var denom1 = 2;
+var denom2 = 1;
+var lit2 = ['b', 'a', 'd'];
+var expo2 = [1,   4, 3];
+
+var cociLit = new Array(), cociExpo = new Array(); 
+var pos1, pos2, cont=0;
+
+var cociNum = num1*denom2;
+var cociDenom = num2*denom1;
+
+for(var i = 0; i < lit1.length; i++){ 
+
+      pos2 = lit2.indexOf(lit1[i]);
+      
+      if(pos2 != -1){
+        cociLit.push(lit1[i]);
+        cociExpo.push(expo1[i] - expo2[pos2]);
+        lit2.splice(pos2,1);
+        expo2.splice(pos2,1);
+      }
+      else{
+        cociLit.push(lit1[i]);
+        cociExpo.push(expo1[i]);  
+      }
+}
+
+cociLit = cociLit.concat(lit2);
+cociExpo = cociExpo.concat(expo2);
+
+console.log(cociNum);
+console.log(cociDenom);
+console.log(cociLit);
+console.log(cociExpo);
+
+//////////////////////ORDENAR A-Z UN ARREGLO
+var literales =  ['v', 'b' , 'c', 'a'], exponentes = [3,4,5,6];
+
+
+//function ordenarAZ(literales, exponentes){
+  
+   for(var i = 0 ; i < literales.length; i++){
+        
+      for (var j = i+1 ; j < literales.length; j++) {
+
+        if(literales[i] > literales[j]){
+          aux = literales[i];
+          literales[i] = literales[j];
+          literales[j] = aux;
+
+          aux2 = exponentes[i];
+          exponentes[i]= exponentes[j];
+          exponentes[j] = aux2;
+        } 
+      }
+  }
+  //return [literales, exponentes];
+//}
+
+console.log(literales);
+console.log(exponentes);
